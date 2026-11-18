@@ -1,6 +1,6 @@
 from spellbook.trie import Trie
 
-
+    
 def test_empty_trie():
     t = Trie()
     assert len(t) == 0
@@ -11,17 +11,14 @@ def test_insert_and_contains():
     t.insert("cat")
     t.insert("cats")
     assert "cat" in t
-    assert "ca" not in t  # a prefix is not a word
+    assert "ca" not in t
     assert "cats" in t
 
 def test_insert_duplicate():
     t = Trie()
-    t.insert("dog")
-    t.insert("dog")
-    assert "dog" in t
-    assert len(t._root.children) == 1
-    assert len(t._root.children["d"].children) == 1
-    assert len(t._root.children["d"].children["o"].children) == 1
+    t.insert("dod")
+    t.insert("dod")
+    assert len(t) == 1
 
 def test_len_func():
     t = Trie()
@@ -31,3 +28,13 @@ def test_len_func():
     t.insert("Relax")
     t.insert("Val")
     assert len(t) == 5
+
+def test_not_contains():
+    t = Trie()
+    t.insert("Human")
+    assert "Huxman" not in t
+
+def test_contains_with_same_letters():
+    t = Trie()
+    t.insert("doubled")
+    assert "d" not in t

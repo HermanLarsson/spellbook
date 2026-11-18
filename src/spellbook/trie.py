@@ -22,30 +22,31 @@ class Trie:
     def insert(self, word: str) -> None:
         curr_node = self._root
 
-        for ch in word:
-            if ch in curr_node.children: 
-                curr_node = curr_node.children[ch]
+        for i in range(len(word)):
+            if word[i] in curr_node.children: 
+                curr_node = curr_node.children[word[i]]
             
             else:
-                curr_node.children[ch] = _Node()
-                curr_node = curr_node.children[ch]
+                curr_node.children[word[i]] = _Node()
+                curr_node = curr_node.children[word[i]]
             
-            if ch == word[-1]:
+            if i == (len(word) - 1) and not curr_node.is_word:
                 curr_node.is_word = True
                 self._size += 1
             
     def __contains__(self, word: str) -> bool:
         curr_node = self._root
 
-        for ch in word:
-            if ch in curr_node.children: 
-                curr_node = curr_node.children[ch]
+        for i in range(len(word)):
+            if word[i] in curr_node.children: 
+                curr_node = curr_node.children[word[i]]
                 
-                if ch == word[-1] and curr_node.is_word:
+                if i == (len(word) - 1) and curr_node.is_word:
                     return True
-
+            else: 
+                return False   
         return False
-            
+
     def __len__(self) -> int:
         return self._size
 
