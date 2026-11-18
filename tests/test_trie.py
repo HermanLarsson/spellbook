@@ -10,9 +10,16 @@ def test_empty_trie():
 def test_insert_and_contains():
     t = Trie()
     t.insert("cat")
+    t.insert("cats")
     assert "cat" in t
     assert "ca" not in t  # a prefix is not a word
+    assert "cats" in t
 
-
-# TODO (you): add tests for duplicates, __iter__, starts_with,
-# the empty-string prefix, and a prefix that matches nothing.
+def test_insert_duplicate():
+    t = Trie()
+    t.insert("dog")
+    t.insert("dog")
+    assert "dog" in t
+    assert len(t._root.children) == 1
+    assert len(t._root.children["d"].children) == 1
+    assert len(t._root.children["d"].children["o"].children) == 1
