@@ -6,7 +6,6 @@ def test_empty_trie():
     assert len(t) == 0
     assert "a" not in t
 
-
 def test_insert_and_contains():
     t = Trie()
     t.insert("cat")
@@ -23,3 +22,12 @@ def test_insert_duplicate():
     assert len(t._root.children) == 1
     assert len(t._root.children["d"].children) == 1
     assert len(t._root.children["d"].children["o"].children) == 1
+
+def test_len_func():
+    t = Trie()
+    t.insert("Sleep")
+    t.insert("Turn")
+    t.insert("Sleepy")
+    t.insert("Relax")
+    t.insert("Val")
+    assert len(t) == 5

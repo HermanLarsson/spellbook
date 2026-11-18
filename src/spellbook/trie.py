@@ -29,8 +29,10 @@ class Trie:
             else:
                 curr_node.children[ch] = _Node()
                 curr_node = curr_node.children[ch]
-                if ch == word[-1]:
-                    curr_node.is_word = True
+            
+            if ch == word[-1]:
+                curr_node.is_word = True
+                self._size += 1
             
     def __contains__(self, word: str) -> bool:
         curr_node = self._root
@@ -45,8 +47,7 @@ class Trie:
         return False
             
     def __len__(self) -> int:
-        """Enables `len(trie)`: the number of distinct words."""
-        raise NotImplementedError
+        return self._size
 
     def __iter__(self) -> Iterator[str]:
         """Enables `for word in trie`. Yield every word (hint: recursion + `yield from`)."""
