@@ -20,13 +20,30 @@ class Trie:
         self._size = 0
 
     def insert(self, word: str) -> None:
-        """Add a word. Inserting the same word twice should not change len()."""
-        raise NotImplementedError
+        curr_node = self._root
 
+        for ch in word:
+            if ch in curr_node.children: 
+                curr_node = curr_node.children[ch]
+            
+            else:
+                curr_node.children[ch] = _Node()
+                curr_node = curr_node.children[ch]
+                if ch == word[-1]:
+                    curr_node.is_word = True
+            
     def __contains__(self, word: str) -> bool:
-        """Enables `"cat" in trie`. True only for whole words, not prefixes."""
-        raise NotImplementedError
+        curr_node = self._root
 
+        for ch in word:
+            if ch in curr_node.children: 
+                curr_node = curr_node.children[ch]
+                
+                if ch == word[-1] and curr_node.is_word:
+                    return True
+
+        return False
+            
     def __len__(self) -> int:
         """Enables `len(trie)`: the number of distinct words."""
         raise NotImplementedError
