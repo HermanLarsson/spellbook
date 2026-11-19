@@ -51,8 +51,20 @@ class Trie:
         return self._size
 
     def __iter__(self) -> Iterator[str]:
-        """Enables `for word in trie`. Yield every word (hint: recursion + `yield from`)."""
-        raise NotImplementedError
+        return self.__iter__helper(self._root, "", "");
+
+    def __iter__helper(self, node, word, last_letter):
+        word += last_letter
+
+        if len(node.children) == 0:
+            return 
+
+        else:
+            for child in node.children:
+                if node.children[child].is_word: 
+                    yield word + child
+                yield from self.__iter__helper(node.children[child], word, child)
+
 
     def starts_with(self, prefix: str) -> list[str]:
         """Return all words beginning with `prefix`."""
