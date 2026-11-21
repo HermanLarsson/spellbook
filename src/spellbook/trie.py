@@ -20,6 +20,9 @@ class Trie:
         self._size = 0
 
     def insert(self, word: str) -> None:
+        if str is not type(word) or word == "":
+            return
+        
         curr_node = self._root
 
         for i in range(len(word)):

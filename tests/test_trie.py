@@ -6,6 +6,14 @@ def test_empty_trie():
     assert len(t) == 0
     assert "a" not in t
 
+# insert and len
+def test_insert_faulty_inputs():
+    t = Trie()
+    t.insert("")
+    t.insert(9)
+    t.insert(None)
+    assert 0 == len(t)
+
 # insert and contain
 def test_insert_and_contains():
     t = Trie()
