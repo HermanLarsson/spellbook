@@ -55,21 +55,23 @@ def test_contains_with_same_letters():
 # iter and contain
 def test_iter_trie():
     t = Trie()
-    l = list()
-    l.append("Ban")
-    l.append("Won")
-    l.append("Wom")
-    l.append("Bann")
+    s = set()
+    counter = 0
+    s.add("Ban")
+    s.add("Won")
+    s.add("Wom")
+    s.add("Bann")
 
     t.insert("Ban")
     t.insert("Won")
     t.insert("Wom")
     t.insert("Bann")
     for word in t:
+        counter += 1
         #print(word)
-        assert word in l
-        assert word in t
-
+        assert word in s
+    assert counter == len(t)
+    
 # iter and contain
 def test_iter_empty_trie():
     t = Trie()
