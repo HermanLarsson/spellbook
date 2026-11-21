@@ -65,7 +65,24 @@ class Trie:
                     yield word + child
                 yield from self.__iter__helper(node.children[child], word, child)
 
-
     def starts_with(self, prefix: str) -> list[str]:
-        """Return all words beginning with `prefix`."""
-        raise NotImplementedError
+        all_words = list()
+        curr_node = self._root
+
+        for i in range(len(prefix)):
+            if prefix[i] in curr_node.children:
+                curr_node = curr_node.children[prefix[i]]
+            else:
+                return []
+
+        return self.starts_with_helper(curr_node, prefix, all_words)
+            
+    def starts_with_helper(self, curr_node, curr_word, all_words) -> list[str]:
+        if curr_node.is_word:
+            all_words.append(curr_word)
+
+        if len(curr_node.children) > 0:
+            for child in curr_node.children:
+                all_words = self.starts_with_helper(curr_node.children[child], curr_word + child, all_words)
+
+        return all_words

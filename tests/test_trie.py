@@ -58,7 +58,7 @@ def test_iter_trie():
     t.insert("Wom")
     t.insert("Bann")
     for word in t:
-        print(word)
+        #print(word)
         assert word in l
         assert word in t
 
@@ -69,3 +69,34 @@ def test_iter_empty_trie():
     for _ in t:
         counter += 1
     assert counter == 0
+
+# starts_with
+def test_starts_with():
+    t = Trie()
+    t.insert("Cat")
+    t.insert("Catepillar")
+    t.insert("Catwoman")
+    t.insert("Cob")
+
+    all_words = t.starts_with("Ca")
+    assert len(all_words) == 3
+    assert "Cat" in all_words
+    assert "Catepillar" in all_words
+    assert "Catwoman" in all_words
+
+# starts_with
+def test_starts_with_no_matches():
+    t = Trie()
+    t.insert("Cat")
+    t.insert("Catepillar")
+    t.insert("Catwoman")
+    t.insert("Cob")
+
+    all_words = t.starts_with("Ka")
+    assert len(all_words) == 0
+
+# starts_with
+def test_starts_with_empty_trie():
+    t = Trie()
+    all_words = t.starts_with("Well")
+    assert len(all_words) == 0
